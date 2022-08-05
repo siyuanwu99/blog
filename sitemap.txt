@@ -1,8 +1,8 @@
+http://edmundwsy.github.io/blog/2022/07/14/MAPF/
 http://edmundwsy.github.io/blog/2022/08/06/ros-link-so/
 http://edmundwsy.github.io/blog/zh-CN/index.html
 http://edmundwsy.github.io/blog/categories/index.html
 http://edmundwsy.github.io/blog/tags/index.html
-http://edmundwsy.github.io/blog/2022/07/14/MAPF/
 http://edmundwsy.github.io/blog/2022/07/12/hello-world/
 http://edmundwsy.github.io/blog
 http://edmundwsy.github.io/blog/tags/Multi-Agent/
