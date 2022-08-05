@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://edmundwsy.github.io/blog/2022/08/06/ros-link-so/</loc>
+    
+    <lastmod>2022-08-05</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://edmundwsy.github.io/blog/zh-CN/index.html</loc>
     
     <lastmod>2022-07-15</lastmod>
@@ -49,7 +58,7 @@
 
   <url>
     <loc>http://edmundwsy.github.io/blog</loc>
-    <lastmod>2022-07-15</lastmod>
+    <lastmod>2022-08-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -57,14 +66,28 @@
   
   <url>
     <loc>http://edmundwsy.github.io/blog/tags/Multi-Agent/</loc>
-    <lastmod>2022-07-15</lastmod>
+    <lastmod>2022-08-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://edmundwsy.github.io/blog/tags/Motion-Planning/</loc>
-    <lastmod>2022-07-15</lastmod>
+    <lastmod>2022-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://edmundwsy.github.io/blog/tags/ROS/</loc>
+    <lastmod>2022-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://edmundwsy.github.io/blog/tags/CMake/</loc>
+    <lastmod>2022-08-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -73,7 +96,14 @@
   
   <url>
     <loc>http://edmundwsy.github.io/blog/categories/Reading/</loc>
-    <lastmod>2022-07-15</lastmod>
+    <lastmod>2022-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://edmundwsy.github.io/blog/categories/Engineering/</loc>
+    <lastmod>2022-08-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
