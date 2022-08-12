@@ -22,17 +22,23 @@
     var CONFIG = {"hostname":"edmundwsy.github.io","root":"/blog/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":230,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Siyuan&#39;s Notebook">
-<meta property="og:type" content="website">
-<meta property="og:title" content="拙笔集">
-<meta property="og:url" content="http://edmundwsy.github.io/blog/categories/Engineering/index.html">
+  <meta name="description" content="Finite state machine in EGO-Planner">
+<meta property="og:type" content="article">
+<meta property="og:title" content="State Machine in EGO-Planner">
+<meta property="og:url" content="http://edmundwsy.github.io/blog/2022/08/12/Finite-State-Machine/index.html">
 <meta property="og:site_name" content="拙笔集">
-<meta property="og:description" content="Siyuan&#39;s Notebook">
+<meta property="og:description" content="Finite state machine in EGO-Planner">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://edmundwsy.github.io/blog/assets/EGO-planner/image-20220812161623176.png">
+<meta property="article:published_time" content="2022-08-12T21:02:13.835Z">
+<meta property="article:modified_time" content="2022-08-12T21:08:33.073Z">
 <meta property="article:author" content="Siyuan Wu">
+<meta property="article:tag" content="ROS">
+<meta property="article:tag" content="Planning">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://edmundwsy.github.io/blog/assets/EGO-planner/image-20220812161623176.png">
 
-<link rel="canonical" href="http://edmundwsy.github.io/blog/categories/Engineering/">
+<link rel="canonical" href="http://edmundwsy.github.io/blog/2022/08/12/Finite-State-Machine/">
 
 
 <script id="page-configurations">
@@ -40,12 +46,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Category: Engineering | 拙笔集</title>
+  <title>State Machine in EGO-Planner | 拙笔集</title>
   
 
 
@@ -165,71 +171,209 @@
         <div class="content-wrap">
           
 
-          <div class="content category">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">Engineering
-          <small>Category</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://edmundwsy.github.io/blog/2022/08/12/Finite-State-Machine/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="Siyuan Wu">
+      <meta itemprop="description" content="Siyuan's Notebook">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="拙笔集">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          State Machine in EGO-Planner
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-08-12 23:02:13 / Modified: 23:08:33" itemprop="dateCreated datePublished" datetime="2022-08-12T23:02:13+02:00">2022-08-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Engineering/" itemprop="url" rel="index"><span itemprop="name">Engineering</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2022</span>
+        <p>Finite state machine in EGO-Planner</p>
+<span id="more"></span>
+
+
+
+<h2 id="EGO-Planner-x2F-EGO-Swarm"><a href="#EGO-Planner-x2F-EGO-Swarm" class="headerlink" title="EGO-Planner &#x2F; EGO-Swarm"></a>EGO-Planner &#x2F; EGO-Swarm</h2><p>Original version with B-spline trajectory optimization</p>
+<h3 id="FSM"><a href="#FSM" class="headerlink" title="FSM"></a>FSM</h3><p>states:</p>
+<ul>
+<li><strong>INIT</strong></li>
+<li><strong>WAIT_TARGET</strong></li>
+<li><strong>SEQUENTIAL_START</strong></li>
+<li><strong>GEN_NEW_TRAJ</strong></li>
+<li><strong>REPLAN_TRAJ</strong></li>
+<li><strong>EXEC_TRAJ</strong></li>
+<li><strong>EMERGENCY_STOP</strong></li>
+</ul>
+<pre><code class="highlight mermaid">graph TD
+ INIT --&gt; force_return
+ INIT --&gt; WAIT_TARGET
+ WAIT_TARGET --&gt; force_return
+ WAIT_TARGET --&gt; SEQUENTIAL_START
+ SEQUENTIAL_START --&gt; EXEC_TRAJ
+ SEQUENTIAL_START --&gt; SEQUENTIAL_START
+ GEN_NEW_TRAJ --&gt; EXEC_TRAJ
+ GEN_NEW_TRAJ --&gt; GEN_NEW_TRAJ
+  REPLAN_TRAJ --&gt; EXEC_TRAJ
+ REPLAN_TRAJ --&gt; REPLAN_TRAJ
+ EXEC_TRAJ --&gt; WAIT_TARGET
+ EXEC_TRAJ --&gt; REPLAN_TRAJ
+ EXEC_TRAJ --&gt; force_return
+ EMERGENCY_STOP --&gt; GEN_NEW_TRAJ
+ A((collision)) --&gt; EMERGENCY_STOP</code></pre>
+
+
+
+<h3 id="Single-agent-Replan"><a href="#Single-agent-Replan" class="headerlink" title="Single agent Replan"></a>Single agent Replan</h3><ol>
+<li>collision occurs</li>
+<li>reach the goal or beyond the replan threshold</li>
+<li>after waiting 0.8s for emergency stop</li>
+</ol>
+<h3 id="Multi-agent-Replan"><a href="#Multi-agent-Replan" class="headerlink" title="Multi-agent Replan"></a>Multi-agent Replan</h3><ul>
+<li><p>broadcast a given strategy at a given frequency</p>
+</li>
+<li><p>check collision as soon as traj received from broadcast network</p>
+</li>
+<li><p>generate a new collision free trajectory when collision detected  &#x3D;&gt; <em>due to latency or packet losses</em>*</p>
+<p><strong>Deadlock is not under consideration</strong></p>
+</li>
+</ul>
+<h2 id="EDG-TEAM"><a href="#EDG-TEAM" class="headerlink" title="EDG-TEAM"></a>EDG-TEAM</h2><ul>
+<li>Joint optimize all trajectories &#x3D;&gt; consider influence of the current agent on all trajectory gradients</li>
+<li>Grouping mechanism<ul>
+<li>Based on Euclidean distance (4.0 meters)</li>
+<li>If grouping: ECBS(centralized, computed on min-index-agent in the group) + MINCO Opt</li>
+<li>If not grouping: Single-agent Planning</li>
+</ul>
+</li>
+</ul>
+<p><img src="/blog/assets/EGO-planner/image-20220812161623176.png" alt="image-20220812161623176"></p>
+<ol>
+<li><p>How to share map?</p>
+<p>share state, including </p>
+<ul>
+<li>start p, v, a; </li>
+<li>target p, v, a; </li>
+<li>local map bound min and max; </li>
+<li>map data</li>
+</ul>
+</li>
+<li><p>How to share trajectory?</p>
+<ol>
+<li>publish to board cast network <code>/boardcast_traj_from_planner</code>, receive message from <code>/boardcast_traj_to_planner</code></li>
+</ol>
+</li>
+<li><p>How to optimize among all these trajectories?</p>
+<p>run a group optimization on one single agent, design joint cost function considering other agent’s trajectory.</p>
+</li>
+</ol>
+<h3 id="FSM-1"><a href="#FSM-1" class="headerlink" title="FSM"></a>FSM</h3><pre class="mermaid" style="text-align: center;">
+            graph TD
+            INIT --> force_return
+INIT --> WAIT_TARGET
+WAIT_TARGET --> force_return
+WAIT_TARGET --> SEQUENTIAL_START
+SEQUENTIAL_START --> EXEC_TRAJ
+SEQUENTIAL_START --> SEQUENTIAL_START
+GEN_NEW_TRAJ --> EXEC_TRAJ
+GEN_NEW_TRAJ --> GEN_NEW_TRAJ
+ REPLAN_TRAJ --> EXEC_TRAJ
+REPLAN_TRAJ --> REPLAN_TRAJ
+EXEC_TRAJ --> WAIT_TARGET
+EXEC_TRAJ --> REPLAN_TRAJ
+EXEC_TRAJ --> force_return
+EMERGENCY_STOP --> GEN_NEW_TRAJ
+A([collision]) --> EMERGENCY_STOP
+CEN_REPLAN_TRAJ -.-> REPLAN_TRAJ
+CEN_REPLAN_TRAJ -.-> CEN_EXEC_TRAJ
+CEN_EXEC_TRAJ -.-> WAIT_TARGET
+B([group check]) -.-> CEN_EXEC_TRAJ
+B -.-> CEN_REPLAN_TRAJ
+          </pre>
+
+
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
+        
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-08-12T23:02:13+02:00"
-              content="2022-08-12">
-          08-12
-        </time>
-      </div>
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>Siyuan Wu
+  </li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    <a href="http://edmundwsy.github.io/blog/2022/08/12/Finite-State-Machine/" title="State Machine in EGO-Planner">http://edmundwsy.github.io/blog/2022/08/12/Finite-State-Machine/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> unless stating additionally.
+  </li>
+</ul>
+</div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/blog/2022/08/12/Finite-State-Machine/" itemprop="url">
-            <span itemprop="name">State Machine in EGO-Planner</span>
-          </a>
-      </div>
 
-    </header>
-  </article>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog/tags/ROS/" rel="tag"># ROS</a>
+              <a href="/blog/tags/Planning/" rel="tag"># Planning</a>
+          </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+        
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-08-06T00:08:30+02:00"
-              content="2022-08-06">
-          08-06
-        </time>
-      </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/blog/2022/08/06/ros-link-so/" itemprop="url">
-            <span itemprop="name">ROS 链接动态库</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/blog/2022/08/06/ros-link-so/" rel="prev" title="ROS 链接动态库">
+      <i class="fa fa-chevron-left"></i> ROS 链接动态库
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-  </div>
+      </footer>
+    
+  </article>
   
   
-  
-
   
 
 
@@ -282,6 +426,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#EGO-Planner-x2F-EGO-Swarm"><span class="nav-number">1.</span> <span class="nav-text">EGO-Planner &#x2F; EGO-Swarm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FSM"><span class="nav-number">1.1.</span> <span class="nav-text">FSM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Single-agent-Replan"><span class="nav-number">1.2.</span> <span class="nav-text">Single agent Replan</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Multi-agent-Replan"><span class="nav-number">1.3.</span> <span class="nav-text">Multi-agent Replan</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EDG-TEAM"><span class="nav-number">2.</span> <span class="nav-text">EDG-TEAM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FSM-1"><span class="nav-number">2.1.</span> <span class="nav-text">FSM</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -360,11 +505,11 @@
     </label>
     <select class="lang-select" data-canonical="">
       
-        <option value="en" data-href="/blog/categories/Engineering/index.html" selected="">
+        <option value="en" data-href="/blog/2022/08/12/Finite-State-Machine/" selected="">
           English
         </option>
       
-        <option value="zh-CN" data-href="/blog/zh-CN/categories/Engineering/index.html" selected="">
+        <option value="zh-CN" data-href="/blog/zh-CN/2022/08/12/Finite-State-Machine/" selected="">
           简体中文
         </option>
       
